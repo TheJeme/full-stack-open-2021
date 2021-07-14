@@ -7,7 +7,7 @@ const Person = require("./Person");
 
 app.use(express.static("build"));
 app.use(express.json());
-morgan.token("body", (request, response) => {
+morgan.token("body", (request) => {
   if (request.method === "POST") return JSON.stringify(request.body);
   else return "";
 });

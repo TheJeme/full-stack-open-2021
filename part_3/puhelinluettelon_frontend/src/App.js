@@ -32,7 +32,17 @@ const App = () => {
 
   const addPerson = (e) => {
     e.preventDefault();
-    if (newName.length === 0 || newNumber.length === 0) return;
+    if (newName.length < 3 || newNumber.length < 8) {
+      setMessage({
+        text: `Name or number is too short. Name must be atleast 3 chars and number 8 chars.`,
+        type: "huono",
+      });
+
+      setTimeout(() => {
+        setMessage(null);
+      }, 5000);
+      return;
+    }
     const personArr = persons.map((e) => e.name);
     const personObject = {
       name: newName,
