@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Notification from "./Notification";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const [message, setMessage] = useState(null);
 
   const login = (event) => {
     axios
@@ -13,6 +16,7 @@ const LoginForm = () => {
       })
       .then((res) => {
         localStorage.setItem("jwt_token", res.data.token);
+        localStorage.setItem("username", res.data.username);
         localStorage.setItem("name", res.data.name);
         setUsername("");
         setPassword("");
@@ -22,11 +26,19 @@ const LoginForm = () => {
         console.log(err);
         setUsername("");
         setPassword("");
+
+        setMessage({
+          text: `Username or password is wrong`,
+        });
+        setTimeout(() => {
+          setMessage(null);
+        }, 3000);
       });
   };
   return (
     <div>
       <h1>log in to application</h1>
+      <Notification message={message} />
       <p>
         username{" "}
         <input

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const CreateNewBlog = () => {
+const CreateNewBlog = (props) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [url, setURL] = useState("");
 
-  const CreateBlog = () => {
+  const createBlog = () => {
     axios
       .post(
         "/api/blogs",
@@ -22,10 +22,16 @@ const CreateNewBlog = () => {
         }
       )
       .then((res) => {
-        setTitle("");
-        setAuthor("");
-        setURL("");
-        window.location.reload();
+        props.setMessage({
+          text: `a new blog ${title} by ${author} added`,
+        });
+        setTimeout(() => {
+          props.setMessage(null);
+          setTitle("");
+          setAuthor("");
+          setURL("");
+          window.location.reload();
+        }, 3000);
       })
       .catch((err) => {
         console.log(err);
@@ -62,7 +68,7 @@ const CreateNewBlog = () => {
           onChange={(e) => setURL(e.target.value)}
         />
       </p>
-      <button onClick={() => CreateBlog()}>create</button>
+      <button onClick={() => createBlog()}>create</button>
     </div>
   );
 };
