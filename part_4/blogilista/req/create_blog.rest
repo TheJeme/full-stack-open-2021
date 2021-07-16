@@ -1,0 +1,11 @@
+POST http://localhost:3003/api/blogs 
+Content-Type: application/json 
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RpOTIiLCJpZCI6IjYwZjE4YjRkNjNhYzAxYTdjY2QzNDA1ZSIsImlhdCI6MTYyNjQ0MjU3OH0.XKAq85EWT6m3ziVo6IDIYotC5Opr4P-acK5Ld4mc0Hs
+
+{
+  "title": "test123",
+  "author": "wwwb",
+  "url": "url",
+  "likes": "72", 
+  "userId": "60f15c79f232cabc7c51618f"
+}
