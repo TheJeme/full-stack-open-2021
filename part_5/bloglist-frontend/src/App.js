@@ -1,24 +1,20 @@
-import React, { useState, useEffect } from 'react'
-import Blog from './components/Blog'
-import blogService from './services/blogs'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import LoginForm from "./components/LoginForm";
+import Blogs from "./components/Blogs";
+
+axios.defaults.baseURL = "http://localhost:3003";
 
 const App = () => {
-  const [blogs, setBlogs] = useState([])
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
-    )  
-  }, [])
+    if (localStorage.getItem("jwt_token")) {
+      setLoggedIn(true);
+    }
+  }, []);
 
-  return (
-    <div>
-      <h2>blogs</h2>
-      {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
-      )}
-    </div>
-  )
-}
+  return <div>{loggedIn ? <Blogs /> : <LoginForm />}</div>;
+};
 
-export default App
+export default App;
