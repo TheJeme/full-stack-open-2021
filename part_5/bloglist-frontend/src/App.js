@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import LoginForm from "./components/LoginForm";
-import Blogs from "./components/Blogs";
+import BlogForm from "./components/BlogForm";
 
 axios.defaults.baseURL = "http://localhost:3003";
 
@@ -14,7 +14,7 @@ const App = () => {
     }
   }, []);
 
-  return <div>{loggedIn ? <Blogs /> : <LoginForm />}</div>;
+  return <div>{loggedIn ? <BlogForm /> : <LoginForm />}</div>;
 };
 
 export default App;

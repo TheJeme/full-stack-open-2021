@@ -14,8 +14,8 @@ const logout = () => {
   window.location.reload();
 };
 
-const Blogs = (props) => {
-  Blogs.propTypes = {
+const BlogForm = (props) => {
+  BlogForm.propTypes = {
     blogs: PropTypes.array.isRequired,
   };
 
@@ -69,4 +69,4 @@ const Blogs = (props) => {
   );
 };
 
-export default Blogs;
+export default BlogForm;

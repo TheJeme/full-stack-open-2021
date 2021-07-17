@@ -40,15 +40,13 @@ const Blog = ({ blog }) => {
   };
   return (
     <div className={"blog"}>
-      {blog.title}{" "}
+      {blog.title} {blog.author}{" "}
       {showBlog ? (
         <div>
           {blog.url}
           <br />
           likes {blog.likes}{" "}
           <button onClick={() => likeBlog(blog)}>like</button>
-          <br />
-          {blog.author}
           <br />
           {blog.user.id === localStorage.getItem("user_id") ? (
             <button onClick={() => removeBlog(blog)}>remove</button>
