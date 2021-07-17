@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import PropTypes from "prop-types";
 import Blog from "./Blog";
 import CreateNewBlog from "./CreateNewBlog";
 import Notification from "./Notification";
@@ -14,6 +15,10 @@ const logout = () => {
 };
 
 const Blogs = (props) => {
+  Blogs.propTypes = {
+    blogs: PropTypes.array.isRequired,
+  };
+
   const [blogs, setBlogs] = useState([]);
   const [message, setMessage] = useState(null);
 
@@ -31,7 +36,13 @@ const Blogs = (props) => {
           (i) => i.username === localStorage.getItem("username")
         );
         localStorage.setItem("user_id", user[0].id);
-        blogService.getAll().then((blogs) => setBlogs(blogs));
+        blogService.getAll().then((blogs) =>
+          setBlogs(
+            blogs.sort(function (a, b) {
+              return b.likes - a.likes;
+            })
+          )
+        );
       })
       .catch((err) => {
         console.log(err);

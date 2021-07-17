@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
+import PropTypes from "prop-types";
 import Notification from "./Notification";
 
 const LoginForm = () => {
+  LoginForm.propTypes = {
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+  };
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 

@@ -1,19 +1,27 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const likeBlog = () => {
+const likeBlog = (blog) => {
   axios
-    .put("/api/blogs", {})
-    .then((res) => {})
+    .put(`/api/blogs/${blog.id}`, {
+      user: `${blog.user.id}`,
+      likes: `${Number(blog.likes) + 1}`,
+      author: `${blog.author}`,
+      title: `${blog.title}`,
+      url: `${blog.url}`,
+    })
+    .then((res) => {
+      window.location.reload();
+    })
     .catch((err) => {
       console.log(err);
     });
 };
 
-const removeBlog = (id) => {
-  if (!window.confirm("Are you sure you want to delete the blog?")) return;
+const removeBlog = (blog) => {
+  if (!window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) return;
   axios
-    .delete(`/api/blogs/${id}`, {
+    .delete(`/api/blogs/${blog.id}`, {
       headers: { Authorization: `bearer ${localStorage.getItem("jwt_token")}` },
     })
     .then(() => {
@@ -37,12 +45,13 @@ const Blog = ({ blog }) => {
         <div>
           {blog.url}
           <br />
-          likes {blog.likes} <button onClick={() => likeBlog()}>like</button>
+          likes {blog.likes}{" "}
+          <button onClick={() => likeBlog(blog)}>like</button>
           <br />
           {blog.author}
           <br />
           {blog.user.id === localStorage.getItem("user_id") ? (
-            <button onClick={() => removeBlog(blog.id)}>remove</button>
+            <button onClick={() => removeBlog(blog)}>remove</button>
           ) : null}
         </div>
       ) : null}
