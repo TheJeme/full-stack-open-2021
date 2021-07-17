@@ -48,6 +48,7 @@ const LoginForm = () => {
       <p>
         username{" "}
         <input
+          id="username"
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -56,12 +57,15 @@ const LoginForm = () => {
       <p>
         password{" "}
         <input
+          id="password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
       </p>
-      <button onClick={(e) => login(e)}>login</button>
+      <button id="login-button" onClick={(e) => login(e)}>
+        login
+      </button>
     </div>
   );
 };

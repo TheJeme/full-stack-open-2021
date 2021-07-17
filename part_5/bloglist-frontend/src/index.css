@@ -24,3 +24,7 @@ body {
   border-width: 1px;
   margin-top: 5px;
 }
+
+p {
+  margin: 0;
+}
