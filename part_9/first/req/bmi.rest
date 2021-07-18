@@ -1,0 +1,2 @@
+GET http://localhost:3003/bmi?weight=77&height=180
+Content-Type: application/json
